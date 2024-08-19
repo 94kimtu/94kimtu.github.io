@@ -53,7 +53,6 @@ const Photo = () => {
                         </div>
                     ) : (
                         data.map((res, idx) => {
-                            console.log(res.media_url);
                             return (
                                 <li key={res.id}>
                                     <section>
