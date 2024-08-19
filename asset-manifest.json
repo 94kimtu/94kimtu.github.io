@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/github.io/static/css/main.f2c7beb7.css",
-    "main.js": "/github.io/static/js/main.02e1ff79.js",
-    "static/js/453.d97c2a10.chunk.js": "/github.io/static/js/453.d97c2a10.chunk.js",
-    "static/media/logo.svg": "/github.io/static/media/logo.176d451673d8f431ef55467d4c312720.svg",
-    "index.html": "/github.io/index.html",
-    "main.f2c7beb7.css.map": "/github.io/static/css/main.f2c7beb7.css.map",
-    "main.02e1ff79.js.map": "/github.io/static/js/main.02e1ff79.js.map",
-    "453.d97c2a10.chunk.js.map": "/github.io/static/js/453.d97c2a10.chunk.js.map"
+    "main.css": "/94kimtu.github.io/static/css/main.f2c7beb7.css",
+    "main.js": "/94kimtu.github.io/static/js/main.54febeed.js",
+    "static/js/453.b3a75c2c.chunk.js": "/94kimtu.github.io/static/js/453.b3a75c2c.chunk.js",
+    "static/media/logo.svg": "/94kimtu.github.io/static/media/logo.176d451673d8f431ef55467d4c312720.svg",
+    "index.html": "/94kimtu.github.io/index.html",
+    "main.f2c7beb7.css.map": "/94kimtu.github.io/static/css/main.f2c7beb7.css.map",
+    "main.54febeed.js.map": "/94kimtu.github.io/static/js/main.54febeed.js.map",
+    "453.b3a75c2c.chunk.js.map": "/94kimtu.github.io/static/js/453.b3a75c2c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f2c7beb7.css",
-    "static/js/main.02e1ff79.js"
+    "static/js/main.54febeed.js"
   ]
 }
