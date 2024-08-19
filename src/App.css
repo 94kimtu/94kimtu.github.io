@@ -8,18 +8,18 @@
 a {
     color: #000;
     text-decoration: none;
-    :visited {
-        color: inherit;
-    }
+}
+a:visited {
+    color: inherit;
 }
 
 .bk-mode {
     color: #fff;
     background-color: #333;
-    * {
-        color: inherit;
-        background-color: inherit;
-    }
+}
+.bk-mode * {
+    color: inherit;
+    background-color: inherit;
 }
 
 .m10 {
@@ -100,12 +100,21 @@ a {
     content: "";
     width: 96px;
     height: 4.8px;
-    background: #f05;
+    background: #333;
     position: absolute;
     top: 0;
     left: 0;
     box-sizing: border-box;
     animation: hitZak 0.3s ease-in-out infinite alternate;
+}
+.time-font {
+    font-family: "ds-dg";
+    font-weight: bold;
+    color: #ffb554 !important;
+    mix-blend-mode: hard-light;
+    backdrop-filter: unset !important;
+    text-shadow: unset !important;
+    background-color: unset !important;
 }
 
 @keyframes hitZak {

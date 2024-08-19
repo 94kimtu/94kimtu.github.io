@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const getInfoApi = async () => {
-    const URI = process.env.REACT_APP_API_URI;
+    const URI = process.env.REACT_APP_URI;
     const ACCESS_TOKEN1 = process.env.REACT_APP_ACCESS_TOKEN1;
     const ACCESS_TOKEN2 = process.env.REACT_APP_ACCESS_TOKEN2;
     const ACCESS_TOKEN3 = process.env.REACT_APP_ACCESS_TOKEN3;

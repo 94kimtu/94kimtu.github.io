@@ -38,13 +38,12 @@ const headerList = [
     {
         page: (
             <>
-                <Icons.IconsLogo
+                <Icons.IconsLogoB
                     style={{ verticalAlign: "middle" }}
                     height={30}
                     width={30}
                     className="App-logo"
                 />
-                <span className="ml5">Home</span>
             </>
         ),
         link: "/",

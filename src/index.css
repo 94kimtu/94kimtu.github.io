@@ -1,13 +1,26 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fastly.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css");
+@font-face {
+    font-family: "ds-dg";
+    src: url("./assets/fonts/dsdgib.ttf");
+    font-weight: bold;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+    font-family: "ds-dg";
+    src: url("./assets/fonts/dsdigi.ttf");
+    font-weight: normal;
+}
+@font-face {
+    font-family: "ds-dg";
+    src: url("./assets/fonts/dsdgit.ttf");
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: "ds-dg";
+    src: url("./assets/fonts/dsdgii.ttf");
+    font-weight: 400;
+    font-style: italic;
+}
+body {
+    font-family: "Wanted Sans Variable";
 }
