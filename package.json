@@ -1,8 +1,8 @@
 {
-  "name": "github.io",
+  "name": "94kimtu.github.io",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://94kimtu.github.io/github.io",
+  "homepage": "https://94kimtu.github.io/94kimtu.github.io",
   "dependencies": {
     "@ngrok/ngrok": "^1.4.1",
     "@ngrok/ngrok-api": "^0.12.0",
