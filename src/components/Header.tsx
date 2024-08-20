@@ -49,8 +49,8 @@ const headerList = [
         link: "/",
     },
     { page: "photo", link: "/photo" },
-    { page: "2", link: "/2" },
-    { page: "3", link: "/3" },
+    { page: "record", link: "/record" },
+    { page: "identity", link: "/identity" },
 ];
 const Header = () => {
     return (
