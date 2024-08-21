@@ -24,6 +24,7 @@ const AsideStyle = styled.section`
             rotate: 0 0 0 360deg;
         }
         .to-top-bbutton-box {
+            cursor: pointer;
             user-select: none;
             position: relative;
             position: absolute;
@@ -31,7 +32,6 @@ const AsideStyle = styled.section`
             height: 100%;
             transition: 0.5s;
             transform: translateZ(25px);
-            cursor: pointer;
             &.front {
                 rotate: 0 1 0 0deg;
                 background-color: #00000066;
