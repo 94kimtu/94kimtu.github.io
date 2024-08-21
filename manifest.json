@@ -1,26 +1,26 @@
 {
-  "short_name": "TUK_Blog",
-  "name": "TUK_Blog",
-  "icons": [
-    {
-      "src": "favicon.svg",
-      "sizes": "48x48 72x72 96x96 128x128 256x256 512x512",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#333333"
+    "short_name": "TUK_Blog",
+    "name": "TUK_Blog",
+    "icons": [
+        {
+            "src": "logoB.svg",
+            "sizes": "48x48 72x72 96x96 128x128 256x256 512x512",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "logoB192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "logoB512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#333333"
 }
