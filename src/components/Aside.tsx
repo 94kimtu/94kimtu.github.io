@@ -20,7 +20,7 @@ const AsideStyle = styled.section`
             rotate: 0.1 1 0.1 360deg;
         }
         :active {
-            transition: 0.5s;
+            transition: 1s;
             rotate: 0 0 0 360deg;
         }
         .to-top-bbutton-box {

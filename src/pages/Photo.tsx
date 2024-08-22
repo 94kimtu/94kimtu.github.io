@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import getInfoApi from "../api/api";
+import React, { Fragment, useEffect, useState } from "react";
+import getInfoApi, { getNextApi } from "../api/api";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -121,27 +121,46 @@ const PhotoStyle = styled.section`
         }
     }
 `;
+
 const Photo = () => {
     const [data, setData] = useState<DataItem[]>([]);
-    // const [pagenation, setPagenation] = useState(null);
+    const [pagenation, setPagenation] = useState(String);
     const [isLoading, setIsLoading] = useState(Boolean);
     useEffect(() => {
         const getData = async () => {
             setIsLoading(true);
             try {
                 const result = await getInfoApi();
-                setData(result.data);
-                // setPagenation(result.paging);
+                setData(result?.data.data);
+                setPagenation(result?.data.paging.next);
             } catch (error) {
                 console.log("error : ", error);
             } finally {
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 0);
+                setIsLoading(false);
             }
         };
         getData();
     }, []);
+
+    const getNextData = async () => {
+        setIsLoading(true);
+        try {
+            const result = await getNextApi(pagenation);
+            // TODO 어떤 방식으로 할지 무한로드? 페이지네이션?
+            setData(result?.data.data);
+            // setData([...data, ...result?.data.data]);
+            setPagenation(result?.data.paging.next);
+        } catch (error) {
+            console.log("error : ", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    useEffect(() => {
+        if (pagenation) {
+            console.log(pagenation);
+        }
+    }, [pagenation]);
     return (
         <PhotoStyle>
             <article className="photo-article">
@@ -153,82 +172,105 @@ const Photo = () => {
                     ) : (
                         data.map((res, idx) => {
                             return (
-                                <li className="photo-li" key={idx}>
-                                    <section className="list-item-section">
-                                        <article className="list-item-article">
-                                            <div
-                                                className={`img-box`}
-                                                style={{
-                                                    backgroundImage: `url(${res.media_url})`,
-                                                }}
-                                            >
-                                                <span
+                                <Fragment key={idx}>
+                                    <li className="photo-li">
+                                        <section className="list-item-section">
+                                            <article className="list-item-article">
+                                                <div
+                                                    className={`img-box`}
                                                     style={{
                                                         backgroundImage: `url(${res.media_url})`,
                                                     }}
-                                                ></span>
-                                            </div>
-                                            <div className="text-area">
-                                                <p className="caption-box">
-                                                    {res.caption
-                                                        .split("#")
-                                                        .map(
-                                                            (
-                                                                hashTag,
-                                                                hashTagIdx
-                                                            ) => {
-                                                                return (
-                                                                    hashTag.trim() !==
-                                                                        "" && (
-                                                                        <Link
-                                                                            to={`https://www.instagram.com/explore/tags/${hashTag.trim()}`}
-                                                                            target="_blank"
-                                                                            key={
-                                                                                hashTagIdx
-                                                                            }
-                                                                        >
-                                                                            {"#" +
-                                                                                hashTag.trim() +
-                                                                                " "}
-                                                                        </Link>
-                                                                    )
-                                                                );
-                                                            }
-                                                        )}
-                                                </p>
-                                                <Link
-                                                    to={res.permalink}
-                                                    target="_blank"
                                                 >
-                                                    게시글로
-                                                </Link>
-                                                <p className="text-time time-font">
-                                                    {
-                                                        res.timestamp.split(
-                                                            "T"
-                                                        )[0]
-                                                    }{" "}
-                                                    {
-                                                        res.timestamp
+                                                    <span
+                                                        style={{
+                                                            backgroundImage: `url(${res.media_url})`,
+                                                        }}
+                                                    ></span>
+                                                </div>
+                                                <div className="text-area">
+                                                    <p className="caption-box">
+                                                        {res.caption
+                                                            .split("#")
+                                                            .map(
+                                                                (
+                                                                    hashTag,
+                                                                    hashTagIdx
+                                                                ) => {
+                                                                    return (
+                                                                        hashTag.trim() !==
+                                                                            "" && (
+                                                                            <Link
+                                                                                to={`https://www.instagram.com/explore/tags/${hashTag.trim()}`}
+                                                                                target="_blank"
+                                                                                key={
+                                                                                    hashTagIdx
+                                                                                }
+                                                                            >
+                                                                                {"#" +
+                                                                                    hashTag.trim() +
+                                                                                    " "}
+                                                                            </Link>
+                                                                        )
+                                                                    );
+                                                                }
+                                                            )}
+                                                    </p>
+                                                    <Link
+                                                        to={res.permalink}
+                                                        target="_blank"
+                                                    >
+                                                        게시글로
+                                                    </Link>
+                                                    <p className="text-time time-font">
+                                                        {
+                                                            res.timestamp.split(
+                                                                "T"
+                                                            )[0]
+                                                        }{" "}
+                                                        {
+                                                            res.timestamp
+                                                                .split("T")[1]
+                                                                .split(":")[0]
+                                                        }
+                                                        :
+                                                        {
+                                                            res.timestamp
+                                                                .split("T")[1]
+                                                                .split(":")[1]
+                                                        }
+                                                        :
+                                                        {res.timestamp
                                                             .split("T")[1]
-                                                            .split(":")[0]
-                                                    }
-                                                    :
-                                                    {
-                                                        res.timestamp
-                                                            .split("T")[1]
-                                                            .split(":")[1]
-                                                    }
-                                                    :
-                                                    {res.timestamp
-                                                        .split("T")[1]
-                                                        .split(":")[2]
-                                                        .slice(0, 2)}
-                                                </p>
-                                            </div>
-                                        </article>
-                                    </section>
-                                </li>
+                                                            .split(":")[2]
+                                                            .slice(0, 2)}
+                                                    </p>
+                                                </div>
+                                            </article>
+                                        </section>
+                                    </li>
+                                    {data.length === idx + 1 && (
+                                        <li className="photo-li">
+                                            <section className="list-item-section">
+                                                <article className="list-item-article">
+                                                    <div
+                                                        className={`img-box`}
+                                                    ></div>
+                                                    <div
+                                                        className="text-area"
+                                                        onClick={() =>
+                                                            getNextData()
+                                                        }
+                                                    >
+                                                        <Link to={"#"}>
+                                                            다음
+                                                        </Link>
+                                                    </div>
+                                                </article>
+                                            </section>
+                                        </li>
+                                    )}
+                                </Fragment>
                             );
                         })
                     )}
