@@ -15,7 +15,7 @@ const getInfoApi = async () => {
             params: {
                 fields: FIELDS,
                 access_token: `${ACCESS_TOKEN}`,
-                limit: 6,
+                // limit: 7,
             },
         })
         .then((res) => {
@@ -28,6 +28,16 @@ const getInfoApi = async () => {
 export const getNextApi = async (next: string) => {
     return await axios
         .get(`${next}`)
+        .then((res) => {
+            return res;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
+export const getprevApi = async (prev: string) => {
+    return await axios
+        .get(`${prev}`)
         .then((res) => {
             return res;
         })

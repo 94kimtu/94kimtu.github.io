@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import getInfoApi, { getNextApi } from "../api/api";
+import getInfoApi, { getNextApi, getprevApi } from "../api/api";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -125,6 +125,8 @@ const PhotoStyle = styled.section`
 const Photo = () => {
     const [data, setData] = useState<DataItem[]>([]);
     const [pagenation, setPagenation] = useState(String);
+    const [nextData, setNextData] = useState();
+    const [prevData, setPrevData] = useState();
     const [isLoading, setIsLoading] = useState(Boolean);
     useEffect(() => {
         const getData = async () => {
@@ -132,7 +134,10 @@ const Photo = () => {
             try {
                 const result = await getInfoApi();
                 setData(result?.data.data);
-                setPagenation(result?.data.paging.next);
+                setPagenation(result?.data);
+                setNextData(result?.data.paging.next);
+                setPrevData(result?.data.paging.next);
+                console.log(result?.data.paging);
             } catch (error) {
                 console.log("error : ", error);
             } finally {
@@ -146,6 +151,20 @@ const Photo = () => {
         setIsLoading(true);
         try {
             const result = await getNextApi(pagenation);
+            // TODO 어떤 방식으로 할지 무한로드? 페이지네이션?
+            setData(result?.data.data);
+            // setData([...data, ...result?.data.data]);
+            setPagenation(result?.data.paging.next);
+        } catch (error) {
+            console.log("error : ", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    const getprevData = async () => {
+        setIsLoading(true);
+        try {
+            const result = await getprevApi(pagenation);
             // TODO 어떤 방식으로 할지 무한로드? 페이지네이션?
             setData(result?.data.data);
             // setData([...data, ...result?.data.data]);

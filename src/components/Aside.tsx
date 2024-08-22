@@ -1,11 +1,10 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 import styled from "styled-components";
-// import Icons from "../assets/Icons";
+import ScrollToTop from "../utils/scrollToTop";
 const AsideStyle = styled.section`
     position: fixed;
-    bottom: 50px;
-    right: 50px;
+    bottom: 20px;
+    right: 20px;
     z-index: 1;
     .to-top-bbutton-area {
         width: 50px;
@@ -76,7 +75,10 @@ const AsideStyle = styled.section`
 const Aside = () => {
     return (
         <AsideStyle>
-            <aside className="to-top-bbutton-area">
+            <aside
+                className="to-top-bbutton-area"
+                onClick={() => ScrollToTop()}
+            >
                 <section className="to-top-bbutton-box front">
                     <article className="to-top-bbutton first"></article>
                     <article className="to-top-bbutton second"></article>
