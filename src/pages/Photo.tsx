@@ -1,7 +1,8 @@
-import React, { Fragment, useEffect, useState } from "react";
-import getInfoApi, { getNextApi, getprevApi } from "../api/api";
+import React, { Fragment, useEffect, useRef, useState } from "react";
+import { getInfoApi, getNextApi, getprevApi } from "../api/api";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import useScrollPositionSaver from "../utils/scrollSave";
 
 interface DataItem {
     res: object;
@@ -123,11 +124,14 @@ const PhotoStyle = styled.section`
 `;
 
 const Photo = () => {
+    const loadMoreRef = useRef<HTMLUListElement>(null);
     const [data, setData] = useState<DataItem[]>([]);
     const [pagenation, setPagenation] = useState(String);
     const [nextData, setNextData] = useState();
     const [prevData, setPrevData] = useState();
     const [isLoading, setIsLoading] = useState(Boolean);
+    useScrollPositionSaver();
+
     useEffect(() => {
         const getData = async () => {
             setIsLoading(true);
@@ -136,8 +140,7 @@ const Photo = () => {
                 setData(result?.data.data);
                 setPagenation(result?.data);
                 setNextData(result?.data.paging.next);
-                setPrevData(result?.data.paging.next);
-                console.log(result?.data.paging);
+                // setPrevData(result?.data.paging.next);
             } catch (error) {
                 console.log("error : ", error);
             } finally {
@@ -146,14 +149,15 @@ const Photo = () => {
         };
         getData();
     }, []);
+    // console.log(pagenation);
 
     const getNextData = async () => {
         setIsLoading(true);
         try {
-            const result = await getNextApi(pagenation);
+            const result = await getNextApi(String(nextData));
             // TODO 어떤 방식으로 할지 무한로드? 페이지네이션?
-            setData(result?.data.data);
-            // setData([...data, ...result?.data.data]);
+            // setData(result?.data.data);
+            setData([...data, ...result?.data.data]);
             setPagenation(result?.data.paging.next);
         } catch (error) {
             console.log("error : ", error);
@@ -175,21 +179,41 @@ const Photo = () => {
             setIsLoading(false);
         }
     };
+
     useEffect(() => {
-        if (pagenation) {
-            console.log(pagenation);
-        }
-    }, [pagenation]);
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    console.log(entry.boundingClientRect);
+                    console.log(entry.intersectionRatio);
+                    console.log(entry.intersectionRect);
+                    console.log(entry.isIntersecting);
+                    console.log(entry.rootBounds);
+                    console.log(entry.target);
+                    console.log(entry.time);
+                });
+                if (loadMoreRef.current) {
+                    observer.observe(loadMoreRef.current);
+                    console.log(observer);
+                }
+            },
+            {
+                rootMargin: "0px 0px -20px 0px",
+                threshold: 0.5,
+            }
+        );
+        console.log(observer);
+    }, []);
     return (
         <PhotoStyle>
             <article className="photo-article">
-                <ul className="photo-ul">
+                <ul className="photo-ul" ref={loadMoreRef}>
                     {isLoading ? (
                         <div className={`${isLoading ? " isLoading" : ""}`}>
                             loading
                         </div>
                     ) : (
-                        data.map((res, idx) => {
+                        data?.map((res, idx) => {
                             return (
                                 <Fragment key={idx}>
                                     <li className="photo-li">

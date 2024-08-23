@@ -9,13 +9,13 @@ const FIELDS =
     "id,username,user_media,medi0a_type,permalink,media_url,timestamp,thumbnail_url,caption,is_shared_to_feed,children";
 const URI = process.env.REACT_APP_URI;
 
-const getInfoApi = async () => {
+export const getInfoApi = async () => {
     return await axios
         .get(`${URI}`, {
             params: {
                 fields: FIELDS,
                 access_token: `${ACCESS_TOKEN}`,
-                // limit: 7,
+                limit: 6,
             },
         })
         .then((res) => {
